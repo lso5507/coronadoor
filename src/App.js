@@ -1,26 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Login from './Component/Login';
+import Main from './Component/Main';
 
-function App() {
+
+ 
+
+
+class App extends React.Component {
+
+  constructor(props) {
+      super(props);
+      
+    
+    
+      this.state = {
+        status:null,
+        data:null
+      };
+
+      
+  }
+  fetchload = () =>{
+    console.log(this.state.data)
+    fetch('http://localhost:3002/api')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({status: data.status,data:data.xdatas})
+        console.log(data.datas)
+      });  
+  }
+
+  componentDidMount() {
+    this.fetchload()
+    this.timer = setInterval(() => this.fetchload(), 3000);
+  }
+  componentWillMount(){
+    this.timer=null;
+  }
+render() {
+  const {status,data} = this.state;
+  
+  
+ 
+        
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <h1 >{status}    {data}</h1>
+        <Main></Main>
+      </div>
   );
+  ;
+}
 }
 
 export default App;

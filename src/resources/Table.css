@@ -1,0 +1,36 @@
+.fixed_headers {
+    width: initial;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-family: sans-serif;
+    
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+
+  }
+td{
+    font-weight:550 ;
+}
+
+
+thead{
+    background-color: black;
+    color: white;
+    
+}
+.fixed_headers tbody tr:nth-child(even){
+    background-color: gray;
+}
+.fixed_headers tbody tr:nth-child(even) input{
+    background-color: gray;
+    color:white;
+}
+.saveButton{
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+}

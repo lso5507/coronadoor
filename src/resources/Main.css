@@ -1,0 +1,88 @@
+body{
+    background: white;
+}
+.content{
+    
+    width:100vw;
+    height: 100vh;
+    display:flex;
+    flex-direction: row;
+}
+.skil{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:30vw;
+    height: 100vh;
+    
+}
+.state{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:70vw;
+    height: 100vh;
+    
+}
+.state .division{
+    position: relative;
+    width:60vw;
+    height: 70vh;
+    border: 2px solid;
+
+}
+.skil .division{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width:20vw;
+    height: 50vh;
+    border: 2px solid;
+}
+.save{
+    font-weight: bold;
+    width:100px;
+    float:right;
+    margin-right: 10px;
+    
+}
+.ContentData{
+    width:100vw;
+}
+.skil .division h1{
+    margin-bottom: 100px;
+    font-size: 3rem;
+    font-weight: bold   ;
+
+}
+.skil .division input{
+    width:5vw;
+    height: 5vh;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+
+}
+.skil .division input:hover{
+    background-color:#F78181;
+    transition:1s
+    
+
+}
+.state .division button{
+    position: absolute;
+    right:0;
+    bottom:0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width:5vw;
+    height: 5vh;
+    font-weight: bold;
+    color:white;
+    background-color: #A9E2F3;
+    border-radius: 10px;
+}
+
+
+
