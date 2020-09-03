@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../resources/Login.css"
-
+////////////////////////////////////////////////변경될 폼입니다 ////////////////////////////////////////////////
 const useInput =initialValue =>{
     const [id,setId]=useState(initialValue);
     const [password,setPassword]=useState();
@@ -26,5 +26,5 @@ function Login(){
         </div>
     );
 }
-
+////////////////////////////////////////////////변경될 폼입니다 ////////////////////////////////////////////////
 export default Login;

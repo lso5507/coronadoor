@@ -16,10 +16,10 @@ var server = net.createServer(function(socket){
     // client로 부터 오는 data를 화면에 출력
     socket.on('data', function(data){
 
-        console.log("test")
+        
         console.log('받은 데이터:' + data);
         socketData=String(data)
-        modelData.push({
+        modelData.push({  // 'data'가 요청이 들어왔을때 modelData에 현재 온도 값과 시간 푸쉬
             time:date.getDate(),
             temp:String(data),
             memo:""
@@ -31,7 +31,7 @@ var server = net.createServer(function(socket){
         
         
         })
-        socket.write("0"); // 받은 데이터 다시 전송
+        socket.write("0"); // 받은 데이터 다시 전송   1==unLock  0==임시
     });
 
     // client와 접속이 끊어졌을 때

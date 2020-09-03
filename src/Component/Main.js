@@ -73,27 +73,31 @@ const useInput=initialValue  =>{
 
 const fetchload = () =>{
     
-    fetch('http://localhost:3002/api')
-      .then(res => res.json())
-      .then(data => {
+    // fetch('http://localhost:3002/api')
+    //   .then(res => res.json())
+    //   .then(data => {
         
-        console.log(modelData)
-        modelData=data
-        
-      });  
-      
+    //     console.log(modelData)
+    //     // return data
+    //     return {time:2000,temp:"36도",memo:"plzComeToME"}        
+    //   });  
+      const model = [{time:2000,temp:"36도",memo:"plzComeToME"}] 
+
+      return model       
+
   }
-const getData = (data) =>{
-    modelData=data
-}
+
 function Main(){
-    
+    const [data,setData] = useState([''])  // 전달받은 온도 값을 저장하기 위한 변수 
     useEffect(() => {
-        const timer = setInterval(() => fetchload(), 3000);
-        },[]);
+        const timer = setInterval(() =>setData(fetchload()), 3000);  // 3초마다 온도 값 새로고침
+        
+       
+        });
     
     const lock = useInput("ON");
-    const data_save = useInput(modelData)
+    const data_save = useInput(data)
+    
     return(
         <div className="content">
             <div className="state">
@@ -109,21 +113,23 @@ function Main(){
                     </thead>
                     <tbody>
                     {
-                    memo.map(data=>(
+              
+                    data.map(data=>(     // map을 이용하여 데이터들을 Tabel 서식에 맞게 뿌려줌
+                         
                             <Table  time={data.time} temp={data.temp+"°C"} memo={data.memo}/>    
                     ))}
                     </tbody>
                 </table>
                 
-                <button onClick={data_save.dataSave}>SAVE</button>
+                <button onClick={data_save.dataSave}>SAVE</button>  {/*클릭시 data_save 객체안에 dataSave 요청 */}
                 </div>
             </div>
       
             <div className="skil">
                 
               <div className="division">
-                  <h1>Door : {lock.lock}</h1>
-                <input type="button" value={lock.lock} onClick={lock.lockOnClick}></input>
+                  <h1>Door : {lock.lock}</h1>  {/* 현재 문 상태 표시 */}
+                <input type="button" value={lock.lock} onClick={lock.lockOnClick}></input>  {/*클릭시 lock 객체안에 lockOnClick 요청 */}
               </div>
             </div>
 
