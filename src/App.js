@@ -20,23 +20,7 @@ class App extends React.Component {
 
       
   }
-  fetchload = () =>{
-    console.log(this.state.data)
-    fetch('http://localhost:3002/api')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({status: data.status,data:data.xdatas})
-        console.log(data.datas)
-      });  
-  }
-
-  componentDidMount() {
-    this.fetchload()
-    this.timer = setInterval(() => this.fetchload(), 3000);
-  }
-  componentWillMount(){
-    this.timer=null;
-  }
+ 
 render() {
   const {status,data} = this.state;
   

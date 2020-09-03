@@ -1,12 +1,13 @@
-import React,{useRef,useState} from 'react';
+import React,{useEffect,useState,useMemo} from 'react';
 import "../resources/Main.css"
 import Table from "./Table";
 import '../resources/Table.css';
-var data = [  //아두이노에서 전달받을 Data값 임시 지정
-    {id: 1,time:"23:00:00", temp: '37.8', memo: ''},
-    {id: 2,time:"23:00:00", temp: '37.5', memo: ''},
-    {id: 3,time:"23:00:00", temp: '38.0', memo: ''}
-  ];
+  // componentDidMount, componentDidUpdate와 같은 방식으로
+
+  var modelData = [  //아두이노에서 전달받을 Data값 임시 지정 //    {time:"23:00:00", temp: '37.8', memo: ''},
+  {time:"23:00:00", temp: '37.8', memo: ''}
+
+];
 function saveToFile_Chrome(fileName, content) { //텍스트파일 저장 로직
     var blob = new Blob([content], { type: 'text/plain' });
     let objURL = window.URL.createObjectURL(blob);
@@ -69,9 +70,30 @@ const useInput=initialValue  =>{
 
     return {lock,lockOnClick,dataSave};
 };
+
+const fetchload = () =>{
+    
+    fetch('http://localhost:3002/api')
+      .then(res => res.json())
+      .then(data => {
+        
+        console.log(modelData)
+        modelData=data
+        
+      });  
+      
+  }
+const getData = (data) =>{
+    modelData=data
+}
 function Main(){
+    
+    useEffect(() => {
+        const timer = setInterval(() => fetchload(), 3000);
+        },[]);
+    
     const lock = useInput("ON");
-    const data_save = useInput(data)
+    const data_save = useInput(modelData)
     return(
         <div className="content">
             <div className="state">
@@ -86,9 +108,10 @@ function Main(){
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(data=>(
-                            <Table key={data.id} id={data.id} time={data.time} temp={data.temp+"°C"} memo={data.memo}/>    
-                        ))}
+                    {
+                    memo.map(data=>(
+                            <Table  time={data.time} temp={data.temp+"°C"} memo={data.memo}/>    
+                    ))}
                     </tbody>
                 </table>
                 

@@ -2,7 +2,11 @@ const express = require('express')
 const router = express.Router();
 const net = require('net');
 
+var modelData = [  //아두이노에서 전달받을 Data값 임시 지정 //    {time:"23:00:00", temp: '37.8', memo: ''},
+    {time:"23:00:00", temp: '37.8', memo: ''}
 
+  ];
+const date =  new Date();
 var socketData=null
 // 서버 생성
 var server = net.createServer(function(socket){
@@ -11,20 +15,23 @@ var server = net.createServer(function(socket){
 
     // client로 부터 오는 data를 화면에 출력
     socket.on('data', function(data){
-        socketData=String(data);
-        
-        console.log(typeof(data), data);
+
+        console.log("test")
         console.log('받은 데이터:' + data);
-        console.log(data)
-        console.log(""+data)
-        console.log(String(data))
+        socketData=String(data)
+        modelData.push({
+            time:date.getDate(),
+            temp:String(data),
+            memo:""
+        })
+        
         router.get('/',function(req,res){
 
-            res.send({status:"ok",datas:String(data)});  //현재 상태와 데이터 전달 
+            res.send(modelData);  //현재 상태와 데이터 전달 
         
         
         })
-        socket.write("lock"); // 받은 데이터 다시 전송
+        socket.write("0"); // 받은 데이터 다시 전송
     });
 
     // client와 접속이 끊어졌을 때
