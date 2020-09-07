@@ -7,8 +7,16 @@ const useInput =initialValue =>{
     const onChange = e=>{
         console.log(e.taget);
     }
+    const loginClick = e=>{
 
-    return {id,password,onChange};
+        fetch('http://localhost:3002/api/login')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            
+        });  
+    }
+    return {id,password,onChange,loginClick};
 }
 function Login(){
     const log = useInput();
@@ -20,7 +28,7 @@ function Login(){
              
                 <input {...log} placeholder="username" />
                 <input type="password" placeholder="password" onChange={log.onChange}/>
-                <button>login</button>
+                <button onClick={log.loginClick}>login</button>
                 
             </div>
         </div>

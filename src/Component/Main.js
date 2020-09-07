@@ -72,25 +72,31 @@ const useInput=initialValue  =>{
 };
 
 const fetchload = () =>{
-    
-    // fetch('http://localhost:3002/api')
-    //   .then(res => res.json())
-    //   .then(data => {
+    var datas;
+    fetch('http://localhost:3002/api')
+      .then(res => res.json())
+      .then(data => {
         
-    //     console.log(modelData)
-    //     // return data
-    //     return {time:2000,temp:"36도",memo:"plzComeToME"}        
-    //   });  
-      const model = [{time:2000,temp:"36도",memo:"plzComeToME"}] 
+        if(data){
+            
+            datas=data
+        }
+        else{
+            
+            datas= [{time:"23:00:00", temp: '37.8', memo: ''}];
 
-      return model       
-
+        }
+         
+      });  
+      console.log("datas",datas)
+      return datas
   }
 
 function Main(){
-    const [data,setData] = useState([''])  // 전달받은 온도 값을 저장하기 위한 변수 
+    const [data,setData] = useState([{}])  // 전달받은 온도 값을 저장하기 위한 변수 
     useEffect(() => {
-        const timer = setInterval(() =>setData(fetchload()), 3000);  // 3초마다 온도 값 새로고침
+        console.log(fetchload())
+        const timer = setInterval(() =>console.log(fetchload()), 3000);  // 3초마다 온도 값 새로고침
         
        
         });
@@ -112,12 +118,12 @@ function Main(){
                         </tr>
                     </thead>
                     <tbody>
-                    {
+                    {/* {
               
                     data.map(data=>(     // map을 이용하여 데이터들을 Tabel 서식에 맞게 뿌려줌
                          
                             <Table  time={data.time} temp={data.temp+"°C"} memo={data.memo}/>    
-                    ))}
+                    ))} */}
                     </tbody>
                 </table>
                 
