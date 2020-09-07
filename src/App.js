@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Component/Login';
 import Main from './Component/Main';
+import Join from './Component/Join';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
  
 
@@ -18,6 +19,7 @@ render() {
             <Switch>
               <Route exact path='/' component={Login} />
               <Route exact path='/main' component={Main} />
+              <Route exact path='/join' component={Join} />
             </Switch>
         </Router>
       </div>

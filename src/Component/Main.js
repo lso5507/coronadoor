@@ -88,7 +88,7 @@ const fetchload = () =>{
         }
          
       });  
-      console.log("datas",datas)
+      
       return datas
   }
 
@@ -98,7 +98,7 @@ function Main(){
         console.log(fetchload())
         const timer = setInterval(() =>console.log(fetchload()), 3000);  // 3초마다 온도 값 새로고침
         
-       
+        
         });
     
     const lock = useInput("ON");

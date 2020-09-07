@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import "../resources/Login.css"
 import { useHistory } from 'react-router-dom';
-
-
 ////////////////////////////////////////////////변경될 폼입니다 ////////////////////////////////////////////////
 const useInput =initialValue =>{
     const [id,setId]=useState(initialValue);
-    const [password,setPassword]=useState();
+    const [password,setPassword]=useState(initialValue);
     const onChange = e=>{
         
+        if(e.target.id==="id"){
+            setId(e.target.value)
+            
+        }
+        else if(e.target.id==="password"){
+            setPassword(e.target.value)
+            
+        }
     }
-    const loginClick = e=>{
+    const joinClick = e=>{
 
-        fetch('http://localhost:3002/api/members',{
+        fetch('http://localhost:3002/api/members/'+id,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
               },
-              body:JSON.stringify({id:"root",pw:"1234"})
+              body:JSON.stringify({id:id,pw:password})
             
             
         })
@@ -28,14 +34,14 @@ const useInput =initialValue =>{
         });  
 
     }
-    return {id,password,onChange,loginClick};
+    return {id,password,onChange,joinClick};
 }
 function Login(){
     const log = useInput();
     /* ----------------useHistory를 사용하여 이동-------------- */
     const history = useHistory()
-    const join = ()=>{
-        history.push('/join')
+    const back = ()=>{
+        history.goBack();
     }
     /* ----------------useHistory를 사용하여 이동-------------- */
     return(
@@ -43,11 +49,13 @@ function Login(){
             <div className="form">
 
              
-                <input {...log} placeholder="username" />
-                <input type="password" placeholder="password" onChange={log.onChange}/>
-                <button onClick={log.loginClick}>login</button>
+                <input type="password" placeholder="MemberCode"/>
+                <input onChange={log.onChange} type="text" placeholder="id"  id="id" />
+                <input onChange={log.onChange} type="password" placeholder="password"  id="password"/>
+                <button onClick={log.joinClick}>Join</button>
                 <div className="space"></div>
-                <button onClick={join}>Join</button>
+                <button onClick={back}>back</button>
+                
                 
             </div>
         </div>
