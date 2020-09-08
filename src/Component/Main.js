@@ -71,32 +71,50 @@ const useInput=initialValue  =>{
     return {lock,lockOnClick,dataSave};
 };
 
-const fetchload = () =>{
-    var datas;
-    fetch('http://localhost:3002/api')
-      .then(res => res.json())
-      .then(data => {
-        
-        if(data){
+// const fetchload = () =>{
+//     var datas;
+    
+//     fetch('http://localhost:3002/api/check')
+//       .then(res => res.json())
+//       .then(data => {
+//         if(data){
             
-            datas=data
-        }
-        else{
-            
-            datas= [{time:"23:00:00", temp: '37.8', memo: ''}];
+//             datas=data
+    
+//         }
+//         else{
 
-        }
+//             datas= [{time:"23:00:00", temp: '37.8', memo: ''}];
+
+//         }
          
-      });  
+//       });  
       
-      return datas
-  }
+//       return datas
+//   }
 
 function Main(){
     const [data,setData] = useState([{}])  // 전달받은 온도 값을 저장하기 위한 변수 
     useEffect(() => {
-        console.log(fetchload())
-        const timer = setInterval(() =>console.log(fetchload()), 3000);  // 3초마다 온도 값 새로고침
+        const timer = setInterval(() =>{
+            fetch('http://localhost:3002/api/check')
+            .then(res => res.json())
+            .then(data => {
+              if(data){
+                  
+                  setData(data)
+          
+              }
+              else{
+      
+                  setData([{time:"23:00:00", temp: '37.8', memo: ''}]);
+      
+              }
+               
+            });  
+            
+            
+        }, 3000);  // 3초마다 온도 값 새로고침
         
         
         });
@@ -118,12 +136,12 @@ function Main(){
                         </tr>
                     </thead>
                     <tbody>
-                    {/* {
+                    {
               
                     data.map(data=>(     // map을 이용하여 데이터들을 Tabel 서식에 맞게 뿌려줌
                          
                             <Table  time={data.time} temp={data.temp+"°C"} memo={data.memo}/>    
-                    ))} */}
+                    ))}
                     </tbody>
                 </table>
                 
