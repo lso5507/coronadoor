@@ -3,53 +3,49 @@ import "../resources/Login.css"
 import { useHistory } from 'react-router-dom';
 ////////////////////////////////////////////////변경될 폼입니다 ////////////////////////////////////////////////
 const useInput =initialValue =>{
-    const history = useHistory()
-
-    const [code,setCode]=useState(initialValue);
     const [id,setId]=useState(initialValue);
     const [password,setPassword]=useState(initialValue);
     const onChange = e=>{
 
-        if(e.target.id==="code"){
-            setCode(e.target.value)   
-        }
-        else if(e.target.id==="id"){
+        if(e.target.id==="id"){
             setId(e.target.value)   
         }
         else if(e.target.id==="password"){
             setPassword(e.target.value)
         }
-    }
-    const joinClick = e=>{
 
-        console.log(code)
+    }
+    const deleteClick = e=>{
+
         console.log(id)
         console.log(password)
 
-        fetch('http://localhost:3002/api/members/'+id,{
-            method: 'POST',
+        if(id == undefined || password == undefined){
+            alert("모두 입력해주세요")
+            return;
+        }
+
+
+        fetch('http://localhost:3002/api/members',{
+            method: 'delete',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
               },
-              body:JSON.stringify({code:code, id:id,pw:password})
+              body:JSON.stringify({id:id, pw:password})
         })
         .then(res => res.json())
         .then(data => {
-            if(data.result == -1){
-                alert("멤버코드가 틀렸거나 이미 사용중 입니다.")
-            }else if(data.result == -2){
-                alert("아이디 사용 불가 (중복)")
-            }else if(data.result == true){
-                console.log("회원가입 성공")
-                alert("회원가입 성공")
-                // 로그인 페이지로 이동
-                history.push('/')
+            if(data.result){
+                alert("회원탈퇴 성공")
+            }else{
+                alert("회원탈퇴 실패")
             }
         });  
 
     }
-    return {id,password,onChange,joinClick};
+    return {id,password,onChange,deleteClick};
 }
+
 function Login(){
     const log = useInput();
     /* ----------------useHistory를 사용하여 이동-------------- */
@@ -62,10 +58,9 @@ function Login(){
         <div className="login-page">
             <div className="form">
 
-                <input onChange={log.onChange} type="password" placeholder="MemberCode" id="code"/>
                 <input onChange={log.onChange} type="text" placeholder="id"  id="id" />
                 <input onChange={log.onChange} type="password" placeholder="password"  id="password"/>
-                <button onClick={log.joinClick}>Join</button>
+                <button onClick={log.deleteClick}>Delete</button>
                 <div className="space"></div>
                 <button onClick={back}>back</button>
                 
