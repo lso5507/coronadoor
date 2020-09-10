@@ -2,6 +2,16 @@ a {
     text-decoration: none; 
     color: black;
 }
+a:hover {
+    text-decoration: none; 
+    color: black;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
 
 #Header {
     width: 100%; 
@@ -9,12 +19,12 @@ a {
     background: #e4e4e4; 
     border-radius: 70px 0 0 70px / 70px 0 0 70px; 
     box-sizing: border-box; 
-    overflow: hidden;
 }
 
-#Header-sysName {
+#Header-Title {
     float: left; 
     width: 70%; 
+    height: 100px;
     line-height: 100px; 
     text-align: center; 
 }       
@@ -24,34 +34,51 @@ a {
     width: 30%; 
     line-height: 100px;
     text-align: center; 
-    background: #a1a1a1; 
+    background: #a1a1a1;
     border-radius: 70px 0 0 70px / 70px 0 0 70px; 
     box-sizing: border-box;
 }
 
-.sysNameStyle {
-    font-size: 2.5rem; 
+.sysTitleStyle {
+    font-size: 60px; 
     font-weight: bold; 
     padding-left: 30px;
 }
-.span {
-    display: inline-block; 
+.spanLogin {
     float: left; 
     width: 50%; 
     font-size: 20px;
-}
-.btnLogout {
-    border: 1px solid black; 
-    padding: 15px;
+    border-right: 1px solid white;
     box-sizing: border-box;
 }
 
-.unBtnLogout {
-    visibility: hidden;;
-    border: 0px ; 
+.spanLogin:last-child{
+    border: 0px;
 }
-@media ( max-width: 1050px ) {
-    .sysNameStyle {
-        font-size: 1rem;
-    }
-  }
+
+/* 메뉴 */
+#mainMenu {
+    width: 100%;
+}
+
+#mainMenu li {
+    position: relative;
+}
+
+#mainMenu li:hover #subMenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+#subMenu {
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    background: #a1a1a1; 
+}
+
+#subMenu li {
+    border-top: 1px solid #e4e4e4;
+    box-sizing: border-box;
+}

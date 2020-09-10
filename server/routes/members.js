@@ -29,8 +29,8 @@ router.post('/',function(req,res){
     
     var input_id = req.body.id
     var input_pw = req.body.pw
-
-    // 아이디, 비밀번호 확인
+    
+    //아이디, 비밀번호 확인
     connection.query('SELECT * from member2 where m_id=? and m_pw=?', [input_id, input_pw] ,(error, rows) => {
         if (error) throw error;
           
