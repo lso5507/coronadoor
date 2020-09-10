@@ -74,18 +74,30 @@ body{
 
 }
 .state .division button{
-    position: absolute;
-    right:0;
-    bottom:0;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    width:5vw;
-    height: 5vh;
+    font-size:20px;
     font-weight: bold;
-    color:white;
     background-color: #A9E2F3;
     border-radius: 10px;
 }
 
 
-
+@media ( max-width: 1050px ) {
+    .content {
+        flex-direction: column;
+        
+    }
+    .state,.state .division{
+        width:100vw;
+        
+    }
+    .skil,.skil .division{
+        width:100vw;
+        
+    }
+    .skil .division input{
+        width:100px
+    }
+    .state table{
+        width:100vw
+    }
+  }

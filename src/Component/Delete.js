@@ -16,6 +16,7 @@ const useInput =initialValue =>{
         console.log("세션 아이디:", id)
         console.log(password)
 
+
         if(password === undefined){
             alert("비밀번호를 입력해주세요")
             return;
