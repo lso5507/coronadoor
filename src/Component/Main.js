@@ -1,13 +1,9 @@
-import React,{useEffect,useState,useMemo} from 'react';
+import React,{useEffect,useState} from 'react';
 import "../resources/Main.css"
 import Table from "./Table";
 import '../resources/Table.css';
   // componentDidMount, componentDidUpdate와 같은 방식으로
 
-  var modelData = [  //아두이노에서 전달받을 Data값 임시 지정 //    {time:"23:00:00", temp: '37.8', memo: ''},
-  {time:"23:00:00", temp: '37.8', memo: ''}
-
-];
 function saveToFile_Chrome(fileName, content) { //텍스트파일 저장 로직
     var blob = new Blob([content], { type: 'text/plain' });
     let objURL = window.URL.createObjectURL(blob);
@@ -27,16 +23,20 @@ const useInput=initialValue  =>{
     const [lock,setLock] = useState(initialValue);
     
     const lockOnClick= e=>{ ///////////////////////////////////문 On/Off 이벤트
-        if(e.target.value ==="ON"){
-            setLock("OFF");
-        }
-        else if(e.target.value==="OFF"){
-            setLock("ON");
-        }
-        else {
-            alert("Value ERROR");
+       
             
-        }
+            fetch('http://localhost:3002/api/check',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body:JSON.stringify({data:"1"})
+            })
+            setLock("OPEN...")
+            setTimeout(()=>setLock("LOCK"),2000)
+            
+        
+
     };
 
     const dataSave = data=>{
@@ -94,32 +94,26 @@ const useInput=initialValue  =>{
 //   }
 
 function Main(){
-    const [data,setData] = useState([{}])  // 전달받은 온도 값을 저장하기 위한 변수 
+    const [data,setData] = useState([{time:"00:00:00", temp: '', memo: ''}])  // 전달받은 온도 값을 저장하기 위한 변수 
     useEffect(() => {
         const timer = setInterval(() =>{
             fetch('http://localhost:3002/api/check')
-            .then(res => res.json())
-            .then(data => {
-              if(data){
-                  
-                  setData(data)
-          
-              }
-              else{
-      
-                  setData([{time:"23:00:00", temp: '37.8', memo: ''}]);
-      
-              }
-               
+            .then(res => {
+                
+                return res.json()
+            })
+            .then(data => {   
+                
+                setData(data)
             });  
             
             
         }, 3000);  // 3초마다 온도 값 새로고침
         
         
-        });
+        },[]);
     
-    const lock = useInput("ON");
+    const lock = useInput("LOCK");
     const data_save = useInput(data)
     
     return(
@@ -132,20 +126,21 @@ function Main(){
                             <th>time</th>
                             <th>temp</th>
                             <th>memo</th>
-                            <th></th>
+                            <th><button onClick={data_save.dataSave}>SAVE</button>  {/*클릭시 data_save 객체안에 dataSave 요청 */}</th>
                         </tr>
                     </thead>
                     <tbody>
                     {
-              
+                 
                     data.map(data=>(     // map을 이용하여 데이터들을 Tabel 서식에 맞게 뿌려줌
                          
                             <Table  time={data.time} temp={data.temp+"°C"} memo={data.memo}/>    
-                    ))}
+                    ))
+                    }
                     </tbody>
                 </table>
                 
-                <button onClick={data_save.dataSave}>SAVE</button>  {/*클릭시 data_save 객체안에 dataSave 요청 */}
+                
                 </div>
             </div>
       

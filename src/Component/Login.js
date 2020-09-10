@@ -17,7 +17,7 @@ const useInput =initialValue =>{
             setPassword(e.target.value)
         }
     }
-    const loginClick = e=>{
+    const loginclick = e=>{
         console.log("아이디:", id)
         console.log("비밀번호:", password)
 
@@ -43,7 +43,7 @@ const useInput =initialValue =>{
         });  
     
     }
-    return {id,password,onChange,loginClick};
+    return {id,password,onChange,loginclick};
 }
 function Login(){
     const log = useInput();
@@ -59,7 +59,7 @@ function Login(){
 
                 <input {...log} placeholder="username" onChange={log.onChange} name="id"/>
                 <input type="password" placeholder="password" onChange={log.onChange} name="pw"/>
-                <button onClick={log.loginClick}>login</button>
+                <button onClick={log.loginclick}>login</button>
                 <div className="space"></div>
                 <button onClick={join}>Join</button>
                 

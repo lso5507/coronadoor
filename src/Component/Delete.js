@@ -20,7 +20,7 @@ const useInput =initialValue =>{
         console.log(id)
         console.log(password)
 
-        if(id == undefined || password == undefined){
+        if(id === undefined || password === undefined){
             alert("모두 입력해주세요")
             return;
         }

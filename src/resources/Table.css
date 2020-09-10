@@ -5,12 +5,15 @@
     font-family: sans-serif;
     
 }
-
+th:last-child{
+    text-align: right;
+}  
 th, td {
     padding: 5px;
     text-align: left;
 
   }
+
 td{
     font-weight:550 ;
 }

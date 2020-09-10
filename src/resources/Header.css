@@ -30,7 +30,7 @@ a {
 }
 
 .sysNameStyle {
-    font-size: 60px; 
+    font-size: 2.5rem; 
     font-weight: bold; 
     padding-left: 30px;
 }
@@ -50,3 +50,8 @@ a {
     visibility: hidden;;
     border: 0px ; 
 }
+@media ( max-width: 1050px ) {
+    .sysNameStyle {
+        font-size: 1rem;
+    }
+  }
