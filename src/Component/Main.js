@@ -98,7 +98,7 @@ function Main(){
     const [data,setData] = useState([{time:"00:00:00", temp: '', memo: ''}])  // 전달받은 온도 값을 저장하기 위한 변수 
     useEffect(() => {
     
-        window.location.reload();
+        
 
         const timer = setInterval(() =>{
             fetch('http://localhost:3002/api/check')

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { Link,useState } from 'react';
 import "../resources/Login.css"
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory, Redirect,browserHistory } from 'react-router-dom';
 
 
 ////////////////////////////////////////////////변경될 폼입니다 ////////////////////////////////////////////////
@@ -37,10 +37,14 @@ const useInput =initialValue =>{
         .then(data => {
             if(data.result){ 
                 window.sessionStorage.setItem("id", id) // 세션 설정
-                history.push('/main'); // 메인 페이지로 이동
-                // history.replace('/main');
+                
+                window.location.href='/main'
+
+                
+            //    return  <Redirect to={Main} />
             }else{
                 alert("아이디 또는 비밀번호가 틀립니다.")
+                
             }  
         });  
     }
@@ -57,7 +61,7 @@ function Login(){
     return(
         <div className="login-page">
             <div className="form">
-
+                
                 <input {...log} placeholder="username" onChange={log.onChange} name="id"/>
                 <input type="password" placeholder="password" onChange={log.onChange} name="pw"/>
                 <button onClick={log.loginclick}>login</button>
