@@ -93,9 +93,15 @@ const useInput=initialValue  =>{
 //       return datas
 //   }
 
+
 function Main(){
+
+
     const [data,setData] = useState([{}])  // 전달받은 온도 값을 저장하기 위한 변수 
     useEffect(() => {
+    
+        window.location.reload();
+
         const timer = setInterval(() =>{
             fetch('http://localhost:3002/api/check')
             .then(res => res.json())
@@ -117,8 +123,9 @@ function Main(){
         }, 3000);  // 3초마다 온도 값 새로고침
         
         
-        });
-    
+        },[]);
+
+        
     const lock = useInput("ON");
     const data_save = useInput(data)
     

@@ -10,16 +10,23 @@ const useInput =initialValue =>{
     const [id,setId]=useState(initialValue);
     const [password,setPassword]=useState();
     const onChange = e=>{
-        if(e.target.name == "id"){
+        if(e.target.name === "id"){
             setId(e.target.value) 
-        }
-        if(e.target.name == "pw"){
+        }else if(e.target.name === "pw"){
             setPassword(e.target.value)
         }
     }
     const loginClick = e=>{
         console.log("아이디:", id)
         console.log("비밀번호:", password)
+
+        if(id === undefined){
+            alert("아이디를 입력해주세요")
+            return
+        }else if(password === undefined){
+            alert("비밀번호를 입력해주세요")
+            return
+        }
 
         fetch('http://localhost:3002/api/members',{
             method: 'POST',
@@ -29,19 +36,13 @@ const useInput =initialValue =>{
         .then(res => res.json())
         .then(data => {
             if(data.result){ 
-                console.log("로그인 성공")
-                alert("로그인 성공 (메인 페이지로 이동)")
-
                 window.sessionStorage.setItem("id", id) // 세션 설정
-                // window.sessionStorage.getItem("id")
-
-                history.push('/main'); // 메인 페이지로 이동    
+                history.push('/main'); // 메인 페이지로 이동
+                // history.replace('/main');
             }else{
-                console.log("로그인 실패")
                 alert("아이디 또는 비밀번호가 틀립니다.")
             }  
         });  
-    
     }
     return {id,password,onChange,loginClick};
 }

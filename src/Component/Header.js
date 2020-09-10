@@ -3,11 +3,12 @@ import "../resources/Header.css"
 
 
 function CheckName (chkSession=false, chkName="관리자") {
-    let name = chkName + "님" // 관리자 이름
-    let session = chkSession //세션 체크(기본 false 비로그인)
-
-    if (session == false) { return "unLogin"} 
-    else { return name }
+    let user_id = window.sessionStorage.getItem("id")
+    if(user_id === null){
+        return "unLogin"
+    }else{
+        return user_id
+    }
 }
 
 function CheckBtn (chkSession=false) {

@@ -4,49 +4,51 @@ import { useHistory } from 'react-router-dom';
 ////////////////////////////////////////////////변경될 폼입니다 ////////////////////////////////////////////////
 const useInput =initialValue =>{
     const history = useHistory()
-
+    
     const [code,setCode]=useState(initialValue);
     const [id,setId]=useState(initialValue);
     const [password,setPassword]=useState(initialValue);
     const onChange = e=>{
-
-        if(e.target.id==="code"){
+        if(e.target.id === "code"){
             setCode(e.target.value)   
-        }
-        else if(e.target.id==="id"){
+        }else if(e.target.id === "id"){
             setId(e.target.value)   
-        }
-        else if(e.target.id==="password"){
+        }else if(e.target.id === "password"){
             setPassword(e.target.value)
         }
     }
     const joinClick = e=>{
+        console.log("멤버코드:", code)
+        console.log("아이디:", id)
+        console.log("비밀번호:", password)
 
-        console.log(code)
-        console.log(id)
-        console.log(password)
-
+        if(code === undefined){
+            alert("멤버코드를 입력해주세요")
+            return
+        }else if(id === undefined){
+            alert("아이디를 입력해주세요")
+            return
+        }else if(password === undefined){
+            alert("비밀번호를 입력해주세요")
+            return
+        }
+        
         fetch('http://localhost:3002/api/members/'+id,{
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-              },
-              body:JSON.stringify({code:code, id:id,pw:password})
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+            body:JSON.stringify({code:code, id:id,pw:password})
         })
         .then(res => res.json())
         .then(data => {
-            if(data.result == -1){
+            if(data.result === -1){
                 alert("멤버코드가 틀렸거나 이미 사용중 입니다.")
-            }else if(data.result == -2){
-                alert("아이디 사용 불가 (중복)")
-            }else if(data.result == true){
-                console.log("회원가입 성공")
-                alert("회원가입 성공")
-                // 로그인 페이지로 이동
-                history.push('/')
+            }else if(data.result === -2){
+                alert("이미 사용중인 아이디 입니다")
+            }else if(data.result === true){
+                alert("회원가입 완료")
+                history.push('/') // 로그인 페이지로 이동
             }
-        });  
-
+        }); 
     }
     return {id,password,onChange,joinClick};
 }
