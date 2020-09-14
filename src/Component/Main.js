@@ -71,31 +71,11 @@ const useInput=initialValue  =>{
     return {lock,lockOnClick,dataSave};
 };
 
-// const fetchload = () =>{
-//     var datas;
-    
-//     fetch('http://localhost:3002/api/check')
-//       .then(res => res.json())
-//       .then(data => {
-//         if(data){
-            
-//             datas=data
-    
-//         }
-//         else{
-
-//             datas= [{time:"23:00:00", temp: '37.8', memo: ''}];
-
-//         }
-         
-//       });  
-      
-//       return datas
-//   }
-
-
 function Main(){
-    const [data,setData] = useState([{time:"00:00:00", temp: '', memo: ''}])  // 전달받은 온도 값을 저장하기 위한 변수 
+    const lock = useInput("LOCK");
+    
+    const [tempData,setTempData] = useState([{time:"00:00:00", temp: '37.4', memo: ''},{time:"00:00:00", temp: '37.7', memo: ''}])  // 전달받은 온도 값을 저장하기 위한 변수 
+    const data_save = useInput(tempData)
     useEffect(() => {
     
         
@@ -107,18 +87,24 @@ function Main(){
                 return res.json()
             })
             .then(data => {   
-                
-                setData(data)
+                /*---------------------data가 100개가 넘어가면 자동저장후 초기화----------------- */
+                if(parseFloat(tempData)>1){
+                    data_save.dataSave(tempData)
+                    setTempData([{time:"00:00:00", temp: '37.4', memo: ''}])
+                    setTempData(data)
+                }
+                else{
+                    setTempData(data)
+                }
+                /*---------------------data가 100개가 넘어가면 자동저장----------------- */
             });  
-            
+
             
         }, 3000);  // 3초마다 온도 값 새로고침
         
         
-        },[]);
-    
-    const lock = useInput("LOCK");
-    const data_save = useInput(data)
+        },[]);  
+
     
     return(
         <div className="content">
@@ -136,7 +122,7 @@ function Main(){
                     <tbody>
                     {
                  
-                    data.map(data=>(     // map을 이용하여 데이터들을 Tabel 서식에 맞게 뿌려줌
+                 tempData.map(data=>(     // map을 이용하여 데이터들을 Tabel 서식에 맞게 뿌려줌
                          
                             <Table  time={data.time} temp={data.temp+"°C"} memo={data.memo}/>    
                     ))

@@ -2,16 +2,16 @@
 const mysql      = require('mysql');
 const connection = mysql.createConnection({
     // 로컬 DB
-    // host     : 'localhost',
-    // user     : 'root',
-    // password : '0000',
-    // database : 'link_temp'
+    host     : 'localhost',
+    user     : 'root',
+    password : '1111',
+    database : 'link_temp'
 
     // 학교 DB
-    host     : '61.84.24.210',
-    user     : 'hobby33',
-    password : 'hobby33!!',
-    database : 'link_project'
+    // host     : '61.84.24.210',
+    // user     : 'hobby33',
+    // password : 'hobby33!!',
+    // database : 'link_project'
 });
 
 
@@ -32,7 +32,7 @@ router.post('/',function(req,res){
     
     //아이디, 비밀번호 확인
     connection.query('SELECT * from member2 where m_id=? and m_pw=?', [input_id, input_pw] ,(error, rows) => {
-        if (error) throw error;
+        if (error) throw error
           
         if(rows.length == 1){
             console.log("로그인 성공");

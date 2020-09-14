@@ -64,7 +64,7 @@ function Login(){
         <div className="login-page">
             <div className="form">
 
-                <input onChange={log.onChange} type="password" placeholder="MemberCode" id="code"/>
+                <input onChange={log.onChange} type="text" placeholder="MemberCode" id="code"/>
                 <input onChange={log.onChange} type="text" placeholder="id"  id="id" />
                 <input onChange={log.onChange} type="password" placeholder="password"  id="password"/>
                 <button onClick={log.joinClick}>Join</button>

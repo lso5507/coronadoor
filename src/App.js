@@ -15,10 +15,15 @@ class App extends React.Component {
   constructor(props) {
       super(props);
       this.state={
-        com:Login
+        main:Login,
+        update:Login,
+        
       }
       if(window.sessionStorage.id){
-        this.state.com=Main
+        this.state.main=Main
+        this.state.update=Update
+        
+        
       }
 
   }
@@ -32,12 +37,12 @@ render() {
             <Switch>
               <Route exact path='/' component={Login} />
               
-              <Route exact path='/main' component={this.state.com}></Route>
+              <Route exact path='/main' component={this.state.main}></Route>
             
 
               <Route exact path='/join' component={Join} />
-              <Route exact path='/update' component={Update} />
-              <Route exact path='/delete' component={Delete} />
+              <Route exact path='/update' component={this.state.update} />
+              
             </Switch>
         </Router>
       </div>

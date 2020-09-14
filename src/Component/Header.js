@@ -23,7 +23,7 @@ function chkSession () {
                     </div>
                     <div id="Header-Login">
                         <div className="spanLogin"> 
-                            <a href="/main"> 회원 정보 </a>
+                            <a href="/update"> 회원 정보 </a>
                         </div>
                         <div className="spanLogin"> 
                             <a href="/" onClick={Logout} className="none"> 로그아웃  </a>
