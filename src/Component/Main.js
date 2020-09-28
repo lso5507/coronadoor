@@ -30,7 +30,7 @@ const useInput=initialValue  =>{
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body:JSON.stringify({data:"1"})
+                
             })
             setLock("OPEN...")
             setTimeout(()=>setLock("LOCK"),2000)

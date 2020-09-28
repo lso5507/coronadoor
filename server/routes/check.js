@@ -42,7 +42,7 @@ var server = net.createServer(function(socket){
         })
         router.post('/',function(req,res){
             console.log("post connecting...")
-            socket.write("1"); // 받은 데이터 다시 전송   1==unLock  0==임시
+            socket.write("a"); // 받은 데이터 다시 전송   1==unLock  0==임시
             
         
         })

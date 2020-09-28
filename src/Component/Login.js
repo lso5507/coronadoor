@@ -1,6 +1,6 @@
 import React, { Link,useState } from 'react';
 import "../resources/Login.css"
-import { useHistory, Redirect,browserHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 ////////////////////////////////////////////////변경될 폼입니다 ////////////////////////////////////////////////
